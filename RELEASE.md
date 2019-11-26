@@ -29,6 +29,9 @@
     object, instead of a connection config.
 *   Added a metadata adapter in Kubeflow to support logging the Argo pod ID as
     an execution property.
+*   Pipelines compiled using KubeflowDagRunner now defaults to using the
+    gRPC-based MLMD server deployed in Kubeflow Pipelines clusters when
+    performing operations on pipeline metadata.
 
 ## Bug fixes and other changes
 
