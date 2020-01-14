@@ -50,6 +50,7 @@
 *   Users can create a pipeline using a new experimental CLI command,
     `template`.
 *   Added an iris example with native Keras.
+*   Adding tfx model rewriting and tflite rewriter.
 
 ## Bug fixes and other changes
 *   Added support for an hparams artifact as an input to Trainer in
