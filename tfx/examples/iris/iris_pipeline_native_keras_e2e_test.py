@@ -56,10 +56,12 @@ class IrisPipelineNativeKerasEndToEndTest(tf.test.TestCase):
 
   def assertPipelineExecution(self) -> None:
     self.assertExecutedOnce('CsvExampleGen')
+    self.assertExecutedOnce('Evaluator')
     self.assertExecutedOnce('ExampleValidator')
     self.assertExecutedOnce('SchemaGen')
     self.assertExecutedOnce('StatisticsGen')
     self.assertExecutedOnce('Trainer')
+    self.assertExecutedOnce('Transform')
 
   def testIrisPipelineNativeKeras(self):
     BeamDagRunner().run(
@@ -77,7 +79,7 @@ class IrisPipelineNativeKerasEndToEndTest(tf.test.TestCase):
       artifact_count = len(m.store.get_artifacts())
       execution_count = len(m.store.get_executions())
       self.assertGreaterEqual(artifact_count, execution_count)
-      self.assertEqual(5, execution_count)
+      self.assertEqual(7, execution_count)
 
     self.assertPipelineExecution()
 
