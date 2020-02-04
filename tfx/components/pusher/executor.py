@@ -119,6 +119,7 @@ class Executor(base_executor.BaseExecutor):
     absl.logging.info('Model pushing.')
     # Copy the model we are pushing into
     model_path = path_utils.serving_model_path(model_export_uri)
+    # TODO(b/127149760): revisit after dropping PPP-esque structure.
     # Note: we do not have a logical model version right now. This
     # model_version is a timestamp mapped to trainer's exporter.
     model_version = os.path.basename(model_path)
@@ -126,6 +127,8 @@ class Executor(base_executor.BaseExecutor):
       # For Keras, model will be directly generated under SERVING_MODEL_DIR,
       # use timestamp as version so it can be picked up by servo.
       model_version = str(int(time.time()))
+    assert int(model_version), 'Only support integer as model version: %s.' % (
+        model_version)
     absl.logging.info('Model version is %s', model_version)
     io_utils.copy_dir(model_path, os.path.join(model_push_uri, model_version))
     absl.logging.info('Model written to %s.', model_push_uri)
